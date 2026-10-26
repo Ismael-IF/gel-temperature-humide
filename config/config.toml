@@ -2,7 +2,8 @@
 
 [paths]
 # Jeu de données brut fourni avec le test technique (11,8 M de lignes, 1,4 Go).
-raw_csv       = "C:/Users/ismae/Desktop/Data Science/Dataset/dtf_test.csv"
+# Non versionné : déposer le CSV dans data/raw/, ou indiquer un chemin absolu.
+raw_csv       = "data/raw/dtf_test.csv"
 raw_parquet   = "data/raw/dtf_test.parquet"
 clean_parquet = "data/processed/dtf_clean.parquet"
 audit_csv     = "artefacts/journal_nettoyage.csv"

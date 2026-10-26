@@ -281,6 +281,9 @@ j'ai écartées et pourquoi.
 
 ## Reproduire
 
+Le jeu de données brut n'est pas versionné (1,4 Go). Le déposer dans
+`data/raw/dtf_test.csv`, ou changer `raw_csv` dans `config/config.toml`.
+
 ```bash
 pip install -r requirements.txt
 
