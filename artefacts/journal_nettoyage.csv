@@ -1,0 +1,10 @@
+filtre,description,lignes_supprimees,part_supprimee_pct,lignes_concernees_seule,lignes_restantes
+valeurs_erreur_capteur,Températures sèche ou humide exactement égales aux codes d'erreur,19178,0.163,19178,11754209
+hors_saison_gel,Mois hors de la saison de gel (novembre a mai),4686719,39.808,4695901,7067490
+diurne,Rayonnement solaire supérieur au seuil nocturne,2861729,24.307,5108930,4205761
+humide_superieure_seche,"Température humide supérieure a la sèche, au-dela de la marge de mesure",108307,0.92,672693,4097454
+trop_chaud,Température sous abri trop élevée pour une situation de gel,1631863,13.861,8386166,2465591
+incoherence_abri,Écart abri (2 m) / capteur (50 cm) hors tolérance,503917,4.28,2893441,1961674
+cible_manquante,Température humide manquante,1216,0.01,47222,1960458
+journee_sous_echantillonnee,Journées station totalisant moins de mesures que le minimum attendu,73819,0.627,1241003,1886639
+site_usine,"Stations en fabrication, calibration ou test (site de Nantes)",15836,0.135,123753,1870803

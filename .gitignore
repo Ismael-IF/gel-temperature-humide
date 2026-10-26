@@ -1,0 +1,17 @@
+# Données (volumineuses, non versionnées). Les tableaux de résultats, eux,
+# sont dans artefacts/ et doivent être suivis : ils font partie du rapport.
+data/
+*.parquet
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Modèles sérialisés
+artefacts/*.joblib
+artefacts/*.pkl

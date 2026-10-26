@@ -1,0 +1,7 @@
+{
+  "rmse_decoupage_aleatoire": 1.165,
+  "rmse_saison_validation": 1.175,
+  "rmse_saison_test": 1.211,
+  "surestimation_pct": 3.9,
+  "lecture": "Un decoupage aleatoire place des lignes de la meme heure et de stations voisines des deux cotes de la separation. Les variables atmospheriques y sont identiques : le modele retrouve en test des situations qu'il a deja vues en apprentissage."
+}

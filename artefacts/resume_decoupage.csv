@@ -1,0 +1,4 @@
+jeu,lignes,debut,fin,stations,part_gel_pct,heures_de_gel
+apprentissage,919081,2020-03-15,2022-05-31,1038,16.15,148395
+validation,660291,2022-11-01,2023-03-14,762,21.36,141052
+test,291431,2023-03-15,2023-05-31,1409,3.74,10902

@@ -1,0 +1,71 @@
+# Configuration unique du projet : aucun chemin ni seuil codé en dur dans le code.
+
+[paths]
+# Jeu de données brut fourni avec le test technique (11,8 M de lignes, 1,4 Go).
+raw_csv       = "C:/Users/ismae/Desktop/Data Science/Dataset/dtf_test.csv"
+raw_parquet   = "data/raw/dtf_test.parquet"
+clean_parquet = "data/processed/dtf_clean.parquet"
+audit_csv     = "artefacts/journal_nettoyage.csv"
+predictions   = "data/processed/predictions_test.parquet"
+artefacts_dir = "artefacts"
+figures_dir   = "rapports/figures"
+
+[colonnes]
+# Les 10 variables atmosphériques autorisées par l'énoncé pour la prédiction.
+atmospheriques = ["T2M", "DEWT2M", "RH2M", "WS2M", "WS10M", "WD", "VPD", "CLDC", "SSI", "PRECIP"]
+cible          = "T2M_U_med"
+temperature_seche_capteur = "T2M_D_med"
+
+[nettoyage]
+# Valeurs sentinelles du capteur : +60 et -40 ne sont pas des températures, ce sont des codes d'erreur.
+valeurs_erreur_capteur = [60.0, -40.0]
+# Saison de gel : novembre à mai inclus.
+mois_gel = [11, 12, 1, 2, 3, 4, 5]
+# Au-delà de 50 W/m2 on est en situation diurne : le capteur sans abri est biaisé par le rayonnement.
+ssi_max_nocturne = 50.0
+# Marge d'erreur de mesure autorisée sur l'inégalité physique Tw <= Ts.
+marge_humide_sur_seche = 0.5
+# Situations trop chaudes pour être pertinentes pour le gel.
+t2m_max = 10.0
+# Écart attendu entre température sous abri (2 m) et température sèche sans abri (50 cm).
+ecart_abri_attendu   = 1.5
+ecart_abri_tolerance = 3.0
+# Un capteur sain émet entre 96 et 240 mesures par jour : en dessous de 50, la journée est écartée.
+min_mesures_par_jour = 50
+# Site de production, calibration et test du fabricant, à Nantes.
+site_usine_lat    = 47.266
+site_usine_lon    = -1.561
+site_usine_rayon_deg = 0.05
+
+[decoupage]
+# Protocole imposé par l'énoncé : apprentissage sur 3 saisons, évaluation sur la saison suivante.
+train_debut = 2020-03-15
+train_fin   = 2023-03-14
+test_debut  = 2023-03-15
+# Dernière saison de l'apprentissage, réservée au choix des modèles (jamais au calcul des scores finaux).
+validation_debut = 2022-11-01
+
+[modeles]
+graine = 42
+# Régression polynomiale : degrés et niveaux de régularisation mis en concurrence sur la validation.
+poly_degres = [1, 2, 3]
+poly_alphas = [0.01, 0.1, 1.0, 10.0]
+# Gradient boosting (HistGradientBoostingRegressor) : grille volontairement courte et documentée.
+gbm_grille = [
+  { max_iter = 400, learning_rate = 0.1,  max_leaf_nodes = 31,  min_samples_leaf = 50 },
+  { max_iter = 600, learning_rate = 0.05, max_leaf_nodes = 63,  min_samples_leaf = 50 },
+  { max_iter = 800, learning_rate = 0.05, max_leaf_nodes = 127, min_samples_leaf = 100 },
+]
+
+[evaluation]
+# Seuils d'erreur suivis, demandés par l'énoncé.
+seuils_erreur = [1.0, 2.0]
+# Seuil agronomique de gel sur la température humide.
+seuil_gel = 0.0
+
+[metier]
+# Hypothèses économiques explicites, utilisées uniquement pour chiffrer un ordre de grandeur.
+# Elles sont paramétrables et doivent être rediscutées avec l'exploitant.
+cout_gelee_non_detectee_eur_ha = 4000.0
+cout_fausse_alerte_eur_ha      = 120.0
+surface_suivie_ha              = 1.0

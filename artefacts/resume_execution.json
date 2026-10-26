@@ -1,0 +1,148 @@
+{
+  "duree_totale_s": 255.2,
+  "traces_apprentissage": {
+    "stull_recalibre": {
+      "formule_origine": "Tw = 0.2831 * hr^0.2735 * Ts + 3.018e-04 * hr^2 + 0.01289 * hr - 4.0962",
+      "formule_recalibree": "Tw = 0.2927 * hr^0.2735 * Ts + 3.818e-04 * hr^2 - 0.04978 * hr + 0.1973",
+      "duree_s": 0.2
+    },
+    "polynomiale": {
+      "configuration_retenue": {
+        "jeu_variables": "complet",
+        "degre": 2,
+        "alpha": 10.0,
+        "nb_termes": 170,
+        "rmse_validation": 1.1715669631958008
+      },
+      "lignes_selection": 250000,
+      "duree_s": 70.3
+    },
+    "gradient_boosting": {
+      "configuration_retenue": {
+        "max_iter": 400,
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 50,
+        "rmse_validation": 1.17519679885716
+      },
+      "duree_s": 89.6
+    }
+  },
+  "experience_protocole": {
+    "rmse_decoupage_aleatoire": 1.165,
+    "rmse_saison_validation": 1.175,
+    "rmse_saison_test": 1.211,
+    "surestimation_pct": 3.9,
+    "lecture": "Un decoupage aleatoire place des lignes de la meme heure et de stations voisines des deux cotes de la separation. Les variables atmospheriques y sont identiques : le modele retrouve en test des situations qu'il a deja vues en apprentissage."
+  },
+  "experience_pieges": {
+    "cible_erronee": {
+      "cible_apprise": "T2M_D_med (temperature seche du capteur)",
+      "rmse": 1.17,
+      "lecture": "La temperature seche sans abri se deduit presque directement de la temperature sous abri : le probleme resolu n'est pas celui pose."
+    },
+    "evaluation_circulaire": {
+      "r2_formule_contre_elle_meme": 1.0,
+      "rmse_formule_contre_elle_meme": 0.0,
+      "r2_formule_contre_la_mesure": 0.726,
+      "lecture": "Ajuster la formule sur ses propres sorties donne un R2 de 1 par construction. Confrontee aux mesures de terrain, la meme formule explique nettement moins de variance."
+    }
+  },
+  "modeles": [
+    {
+      "nom": "Persistance 2 m",
+      "description": "Référence sans modèle : la température humide vaut la température sous abri",
+      "colonnes": [
+        "T2M"
+      ],
+      "details": {}
+    },
+    {
+      "nom": "Stull (coefficients publiés)",
+      "description": "Formule de Stull simplifiée, coefficients d'origine, aucun apprentissage",
+      "colonnes": [
+        "T2M",
+        "RH2M"
+      ],
+      "details": {}
+    },
+    {
+      "nom": "Stull recalibré",
+      "description": "Formule de Stull dont les quatre coefficients et l'exposant sont réestimés sur nos mesures",
+      "colonnes": [
+        "T2M",
+        "RH2M"
+      ],
+      "details": {
+        "formule": "Tw = 0.2927 * hr^0.2735 * Ts + 3.818e-04 * hr^2 - 0.04978 * hr + 0.1973",
+        "coeffs": [
+          0.2927205115929826,
+          0.0003817808054093583,
+          -0.04978480710523112,
+          0.19733369099608916
+        ],
+        "exposant": 0.2735
+      }
+    },
+    {
+      "nom": "Régression polynomiale",
+      "description": "Polynome de degré 2 sur le jeu « complet » (170 termes), Ridge alpha=10.0",
+      "colonnes": [
+        "T2M",
+        "DEWT2M",
+        "RH2M",
+        "WS2M",
+        "WS10M",
+        "VPD",
+        "CLDC",
+        "SSI",
+        "PRECIP",
+        "wd_sin",
+        "wd_cos",
+        "ecart_rosee",
+        "pression_vapeur_sat",
+        "pression_vapeur_reelle",
+        "cisaillement_vent",
+        "pluie",
+        "tw_stull"
+      ],
+      "details": {
+        "jeu_variables": "complet",
+        "degre": 2,
+        "alpha": 10.0,
+        "nb_termes": 170,
+        "rmse_validation": 1.1715669631958008
+      }
+    },
+    {
+      "nom": "Gradient boosting",
+      "description": "HistGradientBoostingRegressor, hyperparamètres choisis sur la saison de validation : {'max_iter': 400, 'learning_rate': 0.1, 'max_leaf_nodes': 31, 'min_samples_leaf': 50}",
+      "colonnes": [
+        "T2M",
+        "DEWT2M",
+        "RH2M",
+        "WS2M",
+        "WS10M",
+        "VPD",
+        "CLDC",
+        "SSI",
+        "PRECIP",
+        "wd_sin",
+        "wd_cos",
+        "ecart_rosee",
+        "pression_vapeur_sat",
+        "pression_vapeur_reelle",
+        "cisaillement_vent",
+        "pluie",
+        "tw_stull"
+      ],
+      "details": {
+        "max_iter": 400,
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 50,
+        "rmse_validation": 1.17519679885716
+      }
+    }
+  ]
+}

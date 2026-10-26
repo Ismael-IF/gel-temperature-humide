@@ -1,0 +1,4 @@
+max_iter,learning_rate,max_leaf_nodes,min_samples_leaf,rmse_validation
+400,0.1,31,50,1.17519679885716
+600,0.05,63,50,1.1757908278456672
+800,0.05,127,100,1.179784035584474

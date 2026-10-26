@@ -1,0 +1,13 @@
+{
+  "lignes_brutes": 11773387,
+  "lignes_nettoyees": 1870803,
+  "part_conservee_pct": 15.89,
+  "stations_brutes": 1739,
+  "stations_conservees": 1537,
+  "periode": [
+    "2020-03-15",
+    "2023-05-31"
+  ],
+  "part_gel_pct": 16.05,
+  "duree_s": 5.9
+}

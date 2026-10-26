@@ -1,0 +1,13 @@
+{
+  "cible_erronee": {
+    "cible_apprise": "T2M_D_med (temperature seche du capteur)",
+    "rmse": 1.17,
+    "lecture": "La temperature seche sans abri se deduit presque directement de la temperature sous abri : le probleme resolu n'est pas celui pose."
+  },
+  "evaluation_circulaire": {
+    "r2_formule_contre_elle_meme": 1.0,
+    "rmse_formule_contre_elle_meme": 0.0,
+    "r2_formule_contre_la_mesure": 0.726,
+    "lecture": "Ajuster la formule sur ses propres sorties donne un R2 de 1 par construction. Confrontee aux mesures de terrain, la meme formule explique nettement moins de variance."
+  }
+}

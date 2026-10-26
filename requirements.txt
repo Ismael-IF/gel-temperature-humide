@@ -1,0 +1,9 @@
+# Socle minimal : tout tourne avec scikit-learn, sans dépendance GPU ni gradient boosting externe.
+numpy>=2.0
+pandas>=2.2
+pyarrow>=16.0
+scipy>=1.13
+scikit-learn>=1.5
+matplotlib>=3.8
+seaborn>=0.13
+pytest>=8.0
