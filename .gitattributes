@@ -1,0 +1,7 @@
+# Les notebooks sont de la documentation : ils illustrent et rejouent les
+# resultats, ils ne sont pas le coeur du projet. Sans cette ligne, GitHub
+# annonce "Jupyter Notebook 82 %" pour un depot dont le code est un package
+# Python teste, parce qu'il compte les octets et que les sorties enregistrees
+# dans les notebooks pesent lourd. Les notebooks restent visibles et
+# consultables, seul le decompte des langages change.
+notebooks/** linguist-documentation
